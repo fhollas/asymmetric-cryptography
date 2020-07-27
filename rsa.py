@@ -30,6 +30,8 @@ def rsa_demo(p: int, q: int, e: int, message: int):
     m = c**d % n
     print("Decrypted plaintext:", m)
 
+    return c
+
 
 def generate_keys(p: int, q: int, e: int):
     """ Return a dict containing private and public key parameters."""
@@ -43,8 +45,8 @@ def generate_keys(p: int, q: int, e: int):
 
 def encrypt(n: int, e: int, m: int):
     """ Return encrypted ciphertext."""
-
-    return m**e % n
+    ciphertext = m**e % n
+    return ciphertext
 
 
 def decrypt(n: int, d: int, c: int):
@@ -65,3 +67,25 @@ def verify_signature(n: int, e: int, s: int, m: int):
     v = s**e % n
     print("Verfied m:", v)
     return v == m
+
+def homomorphic(ci1, ci2, e, d):
+    ci3 = ci1 * ci2
+    print('\n', ci3)
+    dec3 = ci3**d % n
+    return dec3
+
+
+#cipher1 = rsa_demo(7, 9, 5, int('110011', 2))
+cipher1 = rsa_demo(7, 9, 5, 10)
+print('\n Cipher 1:', cipher1)
+#cipher2 = rsa_demo(7, 9, 5, int('110101', 2))
+cipher2 = rsa_demo(7, 9, 5, 5)
+print('\n Cipher 2:', cipher2)
+p = 7
+q = 9
+n = p * q
+phi_n = (p - 1) * (q - 1)
+e = 5
+d = d = cf.inverse_mod(e, phi_n)
+dec = homomorphic(cipher1, cipher2, e, d)
+print('\n Decryption 3:', dec)
