@@ -1,4 +1,6 @@
 import crypto_functions as cf
+import time
+from math import gcd
 
 
 def paillier_demo(p: int, q: int, m: int, g: int, r: int):
@@ -26,12 +28,14 @@ def paillier_demo(p: int, q: int, m: int, g: int, r: int):
     print("Private key (ƛ, μ):", ƛ, μ, "\n")
 
     # find ciphertext c = g**m r**n mod n**2
-    c = g**m * r**n % n**2
+    c = pow(g, m) * pow(r, n) % pow(n, 2)
     print("Ciphertext:", c)
 
     # decrpyt c to verify the plaintext m
-    p = cf.L(c**ƛ % n**2, n) * μ % n
+    p = cf.L(pow(c, ƛ) pow(n, 2), n) * μ % n
     print("Decrypted plaintext:", p)
+
+    return c
 
 
 def generate_keys(p: int, q: int, g: int):
@@ -55,3 +59,5 @@ def decrypt(ƛ: int, μ: int, n: int, c: int):
     """ Return decrypted plaintext."""
 
     return cf.L(c**ƛ % n**2, n) * μ % n
+
+cipher1 = paillier_demo(733, 859, 53, , 17)

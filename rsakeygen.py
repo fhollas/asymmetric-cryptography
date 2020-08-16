@@ -1,8 +1,8 @@
 import random, sys, os, rabinMiller, cryptomath
-
+import time
 
 def main():
-    makeKeyFiles('RSA_demo', 1024)
+    makeKeyFiles('RSA_demo', 128)
 
 
 def generateKey(keySize):
@@ -39,10 +39,10 @@ def makeKeyFiles(name, keySize):
     # delimited by a comma.
 
 
-    if os.path.exists('%s_pubkey.txt' % (name)) or os.path.exists('%s_privkey.txt' % (name)):
-        sys.exit(
-            'WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! Use a different name or delete these files and re-run this program.' % (
-            name, name))
+    #if os.path.exists('%s_pubkey.txt' % (name)) or os.path.exists('%s_privkey.txt' % (name)):
+    #    sys.exit(
+     #       'WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! Use a different name or delete these files and re-run this program.' % (
+    #        name, name))
     publicKey, privateKey = generateKey(keySize)
     print()
     print('The public key is a %s and a %s digit number.' % (len(str(publicKey[0])), len(str(publicKey[1]))))

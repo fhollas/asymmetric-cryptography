@@ -4,3 +4,4 @@
 __pycache__/crypto_functions.cpython-37.pyc
 /RSA_demo_privkey.txt
 /RSA_demo_pubkey.txt
+rsa2.py
