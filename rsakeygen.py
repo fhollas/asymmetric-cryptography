@@ -2,15 +2,17 @@ import random, sys, os, rabinMiller, cryptomath
 import time
 
 def main():
-    makeKeyFiles('RSA_demo', 128)
+    makeKeyFiles('RSA_demo', 5)
 
 
 def generateKey(keySize):
     # Step 1: Create two prime numbers, p and q. Calculate n = p * q.
     print('Generating p prime...')
-    p = rabinMiller.generateLargePrime(keySize)
+    #p = rabinMiller.generateLargePrime(keySize)
+    p = 29
+    q = 31
     print('Generating q prime...')
-    q = rabinMiller.generateLargePrime(keySize)
+    #q = rabinMiller.generateLargePrime(keySize)
     n = p * q
 
     # Step 2: Create a number e that is relatively prime to (p-1)*(q-1).

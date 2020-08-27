@@ -6,8 +6,9 @@ def judge_qr(p,q,n):
         if (p-1) % r == 0:
             if gcd(int((p-1)/r), r) == 1 and gcd((q-1), r) == 1:
                 #print(y,"quadratic residue =&gt; 0")
-                print("quadratic residue")
+                print("mögliche Blocksize r")
                 print(r)
+    return r
                 #return x
             #else:
                 #print(y,"quadratic non-residue =&gt; 1")
@@ -40,15 +41,16 @@ def main():
     print("== Key generation")
     #r = input("\tChoose blocksize r: ")
     #r = int(r)
-    p = 209490258419118348130222483494418126789
-    q = 177205842835470845473200187961499093143
+    p = 733
+    q = 859
     n = p * q
-    #x = judge_qr(p, q, n)
+    #r = judge_qr(p, q, n)
+    r = 61
     #r = input("\n\n Choose residue: ")
-    r = 16831
-    print(r)
-    r = int(r)
-    y = 514
+    #r = 16831
+    #print(r)
+    #r = int(r)
+    y = 51
 
     print("\t Public key  : ", r, n, y)
     print("\t Private key  : ", p, q)
@@ -78,7 +80,7 @@ def main():
     enc3 = enc1 * enc2
     dec3 = decryption(enc3, p, q, r, y, n)
     print("\n Multiplied Ciphertext: ", enc3)
-    print("\n Multiplied Plaintext: ", dec3)
+    print("\n Decrypted Multiplied Ciphertext: ", dec3)
 
 
 main()
