@@ -25,9 +25,9 @@ def decryption(c, p, q, r, y, n):
     print("\n==Decryption")
     start_time = time.time()
     a = pow(c, (int((p-1)*(q-1)/r))) % n
-    print(a)
+    #print(a)
     b = pow(y, (int((p-1)*(q-1)/r))) % n
-    print(b)
+    #print(b)
     i = 0
     while pow(b, i, n) != a:
         i += 1
@@ -54,33 +54,35 @@ def main():
 
     print("\t Public key  : ", r, n, y)
     print("\t Private key  : ", p, q)
-    m1 = input("\n\n Choose first message: ")
+    m1 = input("\nChoose first message: ")
     u = 175884
     enc1 = encryption(m1, r, y, u, n)
-    print("\n First Ciphertext: ", enc1)
+    print("\nFirst Ciphertext: ", enc1)
     dec1 = decryption(enc1, p, q, r, y, n)
-    print("\n First Plaintext: ", dec1)
+    print("First Plaintext: ", dec1)
 
     m2 = input("\n\n Choose second message: ")
     u = 175884
     enc2 = encryption(m2, r, y, u, n)
-    print("\n Second Ciphertext: ", enc2)
+    print("\nSecond Ciphertext: ", enc2)
     dec2 = decryption(enc2, p, q, r, y, n)
-    print("\n Second Plaintext: ", dec2)
+    print("Second Plaintext: ", dec2)
 
     mm = int(m1) + int(m2)
-    print("\n Plaintext Addition: ", mm)
+    print("\nPlaintext Addition: ", mm)
     enc4 = encryption(mm, r, y, u, n)
-    print("\n Ciphertext of Added plains: ", enc4)
+    print("Ciphertext of Added plains: ", enc4)
     dec4 = decryption(enc4, p, q, r, y, n)
-    print("\n Plaintext of Added plains: ", dec4)
+    print("Plaintext of Added plains: ", dec4)
     #m1bin = bin(int(m1))
     #m2bin = bin(int(m2))
     #mm = int(m1bin, 2) ^ int(m2bin, 2)
+    print("\n== Ciphertext multiplication")
+    start_time = time.time()
     enc3 = enc1 * enc2
+    print("\nTime to multiply:", time.time() - start_time, "seconds") 
+    print("\nMultiplied Ciphertext: ", enc3)
     dec3 = decryption(enc3, p, q, r, y, n)
-    print("\n Multiplied Ciphertext: ", enc3)
-    print("\n Decrypted Multiplied Ciphertext: ", dec3)
-
+    print("Decrypted Multiplied Ciphertext: ", dec3)
 
 main()

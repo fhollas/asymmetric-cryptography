@@ -20,9 +20,10 @@ def L(x, n):
     return ((x - 1) // n)
 
 
-p = 209490258419118348130222483494418126789
-q = 177205842835470845473200187961499093143
-m = 550304652486555850518304746550
+p = 103844424493729464783673436514325107389112184776492347900099959731614955567490392579564120780857291112347896056456188129582564961133333856416387132749066549899710337780162622292600478431747771806899068919131433458433085882570972536194784150618125321731296810296832511691166687368982763828142123821022680691339
+q = 160283770205384345997533038230645880268166974777038928584444206535124606514435532145858726210499376660618434101461226634649209980625348422871851049431800339811789806684434471096776552249689143478749442935655840910669488237008060175191695379212241652870850887940832465755491637648303890655926513564059082298849
+m = 1145863482667666809174044908307
+m1 = 57081308969036885647762169991
 
 if (len(sys.argv) > 1):
     m = int(sys.argv[1])
@@ -59,14 +60,14 @@ k1 = pow(g, m, n * n)
 k2 = pow(r, n, n * n)
 
 cipher = (k1 * k2) % (n * n)
-print("\nTime to encrypt:", time.time() - start_time, "seconds")
+print("Time to encrypt:", time.time() - start_time, "seconds")
 
 print("\n==Decryption")
 start_time = time.time()
 l = (pow(cipher, gLambda, n * n) - 1) // n
 
 mess = (l * gMu) % n
-print("\nTime to decrypt:", time.time() - start_time, "seconds")
+print("Time to decrypt:", time.time() - start_time, "seconds")
 
 print("p=", p, "\tq=", q)
 print("g=", g, "\tr=", r)
@@ -82,26 +83,36 @@ print("Cipher:\t\t", cipher)
 print("Decrypted:\t", mess)
 
 print("================")
-m1 = 22156276073203669139234564254
 print("Now we will add a ciphered value of ", m1, " to the encrypted value")
 
 
-print("\n==Encryption")
+print("\n==Encryption 2")
 start_time = time.time()
 k3 = pow(g, m1, n * n)
 
 
 cipher2 = (k3 * k2) % (n * n)
-print("\nTime to encrypt:", time.time() - start_time, "seconds")
+print("Time to encrypt:", time.time() - start_time, "seconds")
 
+print("\n==Decryption 2")
+start_time = time.time()
+l = (pow(cipher2, gLambda, n * n) - 1) // n
 
+mess3 = (l * gMu) % n
+print("Time to decrypt:", time.time() - start_time, "seconds")
+print(mess3)
+
+print("\n==Add ciphers:")
+start_time = time.time()
 ciphertotal = (cipher * cipher2) % (n * n)
+print("Time to add ciphers:", time.time() - start_time, "seconds")
+print("added cipher:", ciphertotal)
 
 print("\n==Decryption")
 start_time = time.time()
 l = (pow(ciphertotal, gLambda, n * n) - 1) // n
 
 mess2 = (l * gMu) % n
-print("\nTime to decrypt:", time.time() - start_time, "seconds")
+print("Time to decrypt:", time.time() - start_time, "seconds")
 
 print("Result:\t\t", mess2)
