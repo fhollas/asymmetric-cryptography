@@ -82,16 +82,20 @@ def homomorphic(ci01, ci02, ci11, ci12, g, a):
 
 
 
-cipher0_1, cipher0_2, g, a, p, r1, y1, m1 = elgamal_demo(23, 2, 5, 7, 550304652486555850518304746550)
-cipher1_1, cipher1_2, g, a, p, r2, y2, m2 = elgamal_demo(23, 2, 5, 9, 22156276073203669139234564254)
-cipher3_1, cipher3_2, g, a, p, r3, y3, m3 = elgamal_demo(23, 2, 5, 11, 12192701804860537419905592943941808347725613386669159823700)
+cipher0_1, cipher0_2, g, a, p, r1, y1, m1 = elgamal_demo(1559, 55, 5, 9, 29)
+cipher1_1, cipher1_2, g, a, p, r2, y2, m2 = elgamal_demo(1559, 55, 5, 9, 31)
 cipher2_1, cipher2_2 = homomorphic(cipher0_1, cipher0_2, cipher1_1, cipher1_2, g, a)
 print('ci1: ', cipher2_1)
 print('ci2: ', cipher2_2)
 
 print("\n==Decryption")
+y = pow(g, a, p)
+r = 9
+k = pow(y, r, p)
 start_time = time.time()
-xx = pow(cipher2_1, (11 - a))
+d_k = pow(cipher2_1, a, p)
+xx = cf.inverse_mod(d_k, p)
+#xx = pow(cipher2_1, (11 - a))
 #print(xx)
 mm = xx * cipher2_2 % p
 #mm = (pow(cipher2_1, (209490258419118348130222483494418126789-a)) * cipher2_2) % p
@@ -99,6 +103,8 @@ print("\nTime to decrypt:", time.time() - start_time, "seconds")
 m3 = m1 * m2 % p
 print('\n Entschlüsselte multiplizierte Nachricht: ', mm, '\n Original multiplizierte Nachricht: ', m3)
 
-#2 ** 16 % 23 = 9
-#2 ** (5 * 16) * 80 % 23 = 19
-#9 ** 6 * 19 % 23 = 6
+#letters:
+#k=s
+#y=h
+#r=y
+#x=a

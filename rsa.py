@@ -3,37 +3,37 @@ import time
 
 def rsa_demo(p: int, q: int, e: int, message: int):
     """Demo's encryption and decryption with the given arguments."""
-    #print("RSA")
+    print("RSA")
 
     # find public key param n
     n = p * q
     print("Message:", message)
-    #print("Primes p & q:", p, q)
-    #print("Public key parameter n: ", n)
-    #print("Public key parameter e: ", e)
+    print("Primes p & q:", p, q)
+    print("Public key parameter n: ", n)
+    print("Public key parameter e: ", e)
 
     # find phi(n) and private key parameter d
     phi_n = (p - 1) * (q - 1)
     d = cf.inverse_mod(e, phi_n)
-    #print("Phi(n):", phi_n)
-    #print("Private key parameter d:", d)
+    print("Phi(n):", phi_n)
+    print("Private key parameter d:", d, "\n")
 
     # keys
-    #print("Public key n, e:", n, e)
-    #print("Private key n, d:", n, d)
+    print("Public key n, e:", n, e)
+    print("Private key n, d:", n, d)
 
     # create ciphetext c = m**e % n
     print("\n==Encryption")
     start_time = time.time()
     c = pow(message, e, n)
-    print("Time to encrypt:", time.time() - start_time, "seconds")
+    print("\nTime to encrypt:", time.time() - start_time, "seconds")
     print("Ciphertext:", c)
 
     # decrypt c to verify plaintext m
     print("\n==Decryption")
     start_time = time.time()
     m = pow(c, d, n)
-    print("Time to decrypt:", time.time() - start_time, "seconds")
+    print("\nTime to decrypt:", time.time() - start_time, "seconds")
     print("Decrypted plaintext:", m)
 
     return c
@@ -78,35 +78,28 @@ def homomorphic(ci1, ci2, e, d):
     print("\n==Multiplication")
     start_time = time.time()
     ci3 = ci1 * ci2
-    print("Time to multiply:", time.time() - start_time, "seconds")
+    print("\nTime to multiply:", time.time() - start_time, "seconds")
     print('\nMultiplied cipher: ', ci3)
     print("\n==Decrypt multiplied cipher")
     start_time = time.time()
     dec3 = pow(ci3, d, n)
-    print("Time to decrypt:", time.time() - start_time, "seconds")
+    print("\nTime to decrypt:", time.time() - start_time, "seconds")
     return dec3
 
 
-p = 103844424493729464783673436514325107389112184776492347900099959731614955567490392579564120780857291112347896056456188129582564961133333856416387132749066549899710337780162622292600478431747771806899068919131433458433085882570972536194784150618125321731296810296832511691166687368982763828142123821022680691339
-q = 160283770205384345997533038230645880268166974777038928584444206535124606514435532145858726210499376660618434101461226634649209980625348422871851049431800339811789806684434471096776552249689143478749442935655840910669488237008060175191695379212241652870850887940832465755491637648303890655926513564059082298849
+#cipher1 = rsa_demo(7, 9, 5, int('110011', 2))
+cipher1 = rsa_demo(209490258419118348130222483494418126789, 177205842835470845473200187961499093143, 320697230375185983296943967089956439199, 550304652486555850518304746550)
+print('\n Cipher 1:', cipher1)
+#cipher2 = rsa_demo(7, 9, 5, int('110101', 2))
+cipher2 = rsa_demo(209490258419118348130222483494418126789, 177205842835470845473200187961499093143, 320697230375185983296943967089956439199, 22156276073203669139234564254)
+print('\n Cipher 2:', cipher2)
+cipher3 = rsa_demo(209490258419118348130222483494418126789, 177205842835470845473200187961499093143, 320697230375185983296943967089956439199, 12192701804860537419905592943941808347725613386669159823700)
+print('\n Cipher 3:', cipher3)
+p = 209490258419118348130222483494418126789
+q = 177205842835470845473200187961499093143
 n = p * q
 phi_n = (p - 1) * (q - 1)
-e = 154808442598980609327423790927680542596928572683789559999407888976398381655153733149292130250042939505640878558184780906221963945565249464482187736281195651367517644328682372631307789403974180835129123592449011630747770279250268899861063019321567108055486901428432463468391061442133924048749854689105049582323
-#print("Message:", message)
-print("Primes p & q:", p, q)
-print("Public key parameter n: ", n)
-print("Public key parameter e: ", e)
-# find phi(n) and private key parameter d
+e = 320697230375185983296943967089956439199
 d = cf.inverse_mod(e, phi_n)
-print("Phi(n):", phi_n)
-print("Private key parameter d:", d)
-
-cipher1 = rsa_demo(p, q, e, 1145863482667666809174044908307)
-print('\nCipher 1:', cipher1)
-cipher2 = rsa_demo(p, q, e, 57081308969036885647762169991)
-print('\nCipher 2:', cipher2)
-cipher3 = rsa_demo(p, q, e, 65407387490489731397615234043061996155472139894826942015237)
-print('\nCipher 3:', cipher3)
-
 dec = homomorphic(cipher1, cipher2, e, d)
 print('\n Decryption 3:', dec)
